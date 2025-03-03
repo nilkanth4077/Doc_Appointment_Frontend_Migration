@@ -32,6 +32,7 @@ import AdminDashboard from './pages/Admin/AdminDashboard';
 function App() {
   return (
     <>
+      <h4 className='font-bold flex justify-center bg-secondary'>Our website is under development, but feel free to explore - some sections may be incomplete !!</h4>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />

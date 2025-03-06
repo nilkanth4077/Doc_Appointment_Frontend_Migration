@@ -32,7 +32,7 @@ const Patientlogin = () => {
           localStorage.setItem('patienttoken', res.data.token);
           toast.success("Login Successful");
           setTimeout(() => {
-            navigate('/index');
+            navigate('/');
           }, 1200)
           setLoading(false);
 

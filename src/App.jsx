@@ -74,7 +74,7 @@ function App() {
           <Route path='/admindash' element={<Admindash />} /> */}
         </Routes>
       </BrowserRouter>
-      <ToastContainer />
+      <ToastContainer autoClose={2000} />
     </>
   );
 }

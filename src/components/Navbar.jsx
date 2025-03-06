@@ -1,15 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaLaptopMedical } from "react-icons/fa";
-import { MdMenu, MdOutlineShoppingCart } from "react-icons/md";
+import { MdMenu } from "react-icons/md";
 import ResponsiveMenu from "./ResponsiveMenu";
 
 export default function Navigation() {
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
     const [open, setOpen] = useState(false);
-    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     const token =
@@ -19,109 +16,12 @@ export default function Navigation() {
         localStorage.getItem("admintoken");
 
     const NavbarMenu = [
-        {
-            id: 1,
-            title: "Home",
-            link: "/"
-        },
-        {
-            id: 2,
-            title: "Video Call",
-            link: "/"
-        },
-        {
-            id: 3,
-            title: "Book Appointment",
-            link: "/book-appointment"
-        },
-        {
-            id: 4,
-            title: "About",
-            link: "/"
-        },
-        {
-            id: 5,
-            title: "Contact",
-            link: "/"
-        },
-    ]
-
-    useEffect(() => {
-        if (token) {
-            const fetchUserProfile = async () => {
-                try {
-                    const response = await fetch("http://localhost:8080/patient/get", {
-                        method: "GET",
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    });
-
-                    if (response.ok) {
-                        const data = await response.json();
-                        setUser(data);
-                        setLoading(false);
-                    } else if (response.status === 401 || response.status === 403) {
-                        localStorage.removeItem("token");
-                        setUser(null);
-                        setLoading(false);
-                        navigate("/login");
-                    } else {
-                        setLoading(false);
-                        setUser(null);
-                        return (
-                            <div>
-                                <p>Failed to fetch user profile. Please log in.</p>
-                                <button onClick={() => (window.location.href = "/login")}>
-                                    Login
-                                </button>
-                            </div>
-                        );
-                    }
-                } catch (error) {
-                    setError(error.message);
-                    setLoading(false);
-                }
-            };
-
-            fetchUserProfile();
-        } else {
-            setLoading(false);
-        }
-    }, [token, navigate]);
-
-    const handleNavigation = (e) => {
-        if (!currentUser) {
-            e.preventDefault();
-            toast.error("Please log in first", { autoClose: 2000 });
-            navigate("/login");
-            return;
-        }
-
-        switch (currentUser.role) {
-            case "USER":
-                // Allow navigation to "My Assessments"
-                break;
-            case "TUTOR":
-                navigate("/tutor_dashboard");
-                break;
-            case "ADMIN":
-                navigate("/admin_dashboard");
-                break;
-            default:
-                e.preventDefault();
-                toast.error("Unauthorized access", { autoClose: 2000 });
-                navigate("/login");
-        }
-    };
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    if (error) {
-        return <div>{error}</div>;
-    }
+        { id: 1, title: "Home", link: "/" },
+        { id: 2, title: "Video Call", link: "/" },
+        { id: 3, title: "Book Appointment", link: "/book-appointment" },
+        { id: 4, title: "About", link: "/" },
+        { id: 5, title: "Contact", link: "/" },
+    ];
 
     const handleLogout = () => {
         const tokenKey = ["patienttoken", "doctortoken", "verifiertoken", "admintoken"].find(key => localStorage.getItem(key));
@@ -133,7 +33,6 @@ export default function Navigation() {
         <>
             <nav>
                 <div className="flex justify-between items-center py-4 bg-back px-5 md:px-14">
-
                     {/* Logo Section */}
                     <div className="text-2xl flex items-center gap-2 font-bold uppercase">
                         <p className="text-primary">Health</p>

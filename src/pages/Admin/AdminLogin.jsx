@@ -30,7 +30,7 @@ const AdminLogin = () => {
       if (res.data.message === "ok") {
         localStorage.setItem("admintoken", res.data.token);
         toast.success("Login Successful!");
-        setTimeout(() => navigate("/dashmain"), 1200);
+        setTimeout(() => navigate("/admin-dashboard"), 1200);
       } else if (res.data.message === "don'tmatch") {
         toast.error("Incorrect email or password.");
       } else if (res.data.message === "error") {

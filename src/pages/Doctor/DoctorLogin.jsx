@@ -33,7 +33,7 @@ const DoctorLogin = () => {
           toast.success("login Successful");
           localStorage.setItem('doctortoken', res.data.token);
           setTimeout(() => {
-            navigate('/doctordash');
+            navigate('/doctor-dashboard');
           }, 1100);
           setLoading(false);
 

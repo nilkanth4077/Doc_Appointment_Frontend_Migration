@@ -26,6 +26,7 @@ import Register from './pages/Register';
 import { ToastContainer } from "react-toastify";
 import VerifierDashboard from './pages/Verifier/VerifierDashboard';
 import AdminDashboard from './pages/Admin/AdminDashboard';
+import DoctorDashboard from './pages/Doctor/DoctorDashboard';
 
 
 
@@ -41,6 +42,7 @@ function App() {
           <Route path="/book-appointment" element={<BookAppointment />} />
           <Route path="/verifier-dashboard" element={<VerifierDashboard />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
           {/* <Route path="/datetimepicker" element={<DateTimePicker />} />
           <Route path="/docreg" element={<Doctorreg />} />
           <Route path="/patientreg" element={<Patientreg />} />
